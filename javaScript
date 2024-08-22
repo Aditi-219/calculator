@@ -1,0 +1,32 @@
+function appendToDisplay(value) {
+  const display = document.calc.display.value;
+  const lastChar = display.slice(-1);
+  const operators = ['+', '-', '*', '/'];
+  
+  if (operators.includes(lastChar) && operators.includes(value)) {
+    return;
+  }
+  
+  if (value === '.' && display.split(/[\+\-\*\/]/).pop().includes('.')) {
+    return;
+  }
+
+  document.calc.display.value += value;
+}
+
+function clearDisplay() {
+  document.calc.display.value = '';
+}
+
+function deleteLastChar() {
+  document.calc.display.value = document.calc.display.value.slice(0, -1);
+}
+
+function calculateResult() {
+  try {
+    const result = eval(document.calc.display.value);
+    document.calc.display.value = result;
+  } catch (e) {
+    document.calc.display.value = 'Error';
+  }
+}
